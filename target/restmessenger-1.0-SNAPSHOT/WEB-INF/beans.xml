@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation=" http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <context:property-placeholder/>
+    <context:annotation-config/>
+    <bean class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer"/>
+    <bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer"/>
+    <jaxrs:server id="services" address="/">
+        <jaxrs:serviceBeans>
+            <bean class="com.gcsreddy.restmessenger.HelloWorld"/>
+            <bean class="com.gcsreddy.restmessenger.resources.MessageResource"/>
+            <bean class="com.gcsreddy.restmessenger.resources.ProfileResource"/>
+            <bean class="com.gcsreddy.restmessenger.resources.InjectDemoResource"/>
+            <bean class="com.gcsreddy.restmessenger.resources.CommentResource"/>
+            <bean class="com.gcsreddy.restmessenger.rest.DateResource"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
+            <bean class="com.gcsreddy.restmessenger.rest.MyDateConverterProvider"/>
+            <bean class="com.gcsreddy.restmessenger.rest.DateMessageBodyWriter"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+</beans>
